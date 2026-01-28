@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fasha Kharisma Putri | Digital Creative Portfolio</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --soft-pink: #FFD1DC;
+            --vibrant-pink: #FF85A1;
+            --soft-yellow: #FFF9C4;
+            --accent-yellow: #FDE047;
+            --cream: #FFFDF5;
+            --grad-pink-yellow: linear-gradient(135deg, #FFD1DC 0%, #FFF9C4 100%);
+            --grad-vibrant: linear-gradient(90deg, #FF85A1 0%, #FDE047 100%);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(180deg, var(--cream) 0%, #FFF9FB 100%);
+            color: #2D3436;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Glassmorphism Navigation */
+        nav {
+            background: rgba(255, 253, 245, 0.7);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 133, 161, 0.1);
+        }
+
+        /* BUBBLE ANIMATION */
+        .bubble-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .bubble {
+            position: absolute;
+            bottom: -100px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: rise var(--speed) infinite linear;
+            box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        @keyframes rise {
+            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.5; }
+            90% { opacity: 0.5; }
+            100% { transform: translateY(-110vh) translateX(var(--distance)) rotate(360deg); opacity: 0; }
+        }
+
+        /* Profile Blob Animation */
+        .profile-container {
+            position: relative;
+            width: 320px;
+            height: 320px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .profile-frame {
+            position: absolute;
+            width: 115%;
+            height: 115%;
+            border: 3px solid transparent;
+            background: var(--grad-vibrant) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: destination-out;
+            mask-composite: exclude;
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            animation: morphing 10s infinite alternate cubic-bezier(0.45, 0.05, 0.55, 0.95);
+            z-index: 1;
+        }
+
+        .profile-img-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: var(--grad-pink-yellow);
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            animation: morphing 12s infinite alternate-reverse cubic-bezier(0.45, 0.05, 0.55, 0.95);
+            z-index: 2;
+            box-shadow: 0 20px 50px rgba(255, 133, 161, 0.15);
+        }
+
+        @keyframes morphing {
+            0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+            25% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+            50% { border-radius: 50% 50% 20% 80% / 25% 80% 20% 75%; }
+            75% { border-radius: 80% 20% 50% 50% / 30% 50% 50% 70%; }
+            100% { border-radius: 40% 60% 60% 40% / 60% 40% 40% 60%; }
+        }
+
+        .card-aesthetic {
+            background: white;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 133, 161, 0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .card-aesthetic:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 45px rgba(255, 133, 161, 0.1);
+            border-color: var(--soft-pink);
+        }
+
+        .gradient-text {
+            background: var(--grad-vibrant);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .btn-grad {
+            background: var(--grad-vibrant);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .btn-grad:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(255, 133, 161, 0.3);
+        }
+
+        .edu-node {
+            position: relative;
+            padding-left: 2.5rem;
+            border-left: 2px dashed var(--soft-pink);
+            margin-bottom: 2rem;
+        }
+
+        .edu-node::before {
+            content: '';
+            position: absolute;
+            left: -9px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            background: var(--grad-vibrant);
+            border-radius: 50%;
+            border: 3px solid white;
+        }
+
+        .quote-box {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: #FF85A1;
+            position: relative;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bubble-container" id="bubbleContainer"></div>
+
+    <nav class="fixed top-0 w-full z-50 px-6 md:px-12 py-5 flex justify-between items-center">
+        <div class="font-serif text-2xl italic tracking-tighter">Fasha<span class="text-pink-400">.</span></div>
+        <div class="hidden md:flex gap-8 text-[10px] font-bold uppercase tracking-[0.3em] text-gray-400">
+            <a href="#home" class="hover:text-pink-500 transition-colors">Intro</a>
+            <a href="#about" class="hover:text-pink-500 transition-colors">Profile</a>
+            <a href="#education" class="hover:text-pink-500 transition-colors">Education</a>
+            <a href="#experience" class="hover:text-pink-500 transition-colors">Experience</a>
+            <a href="#contact" class="hover:text-pink-500 transition-colors">Collab</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex flex-col md:flex-row items-center justify-center px-6 md:px-20 gap-16 pt-24">
+        <div class="md:w-1/2 text-center md:text-left">
+            <p class="text-[10px] font-black tracking-[0.5em] text-pink-400 mb-6 uppercase">Creative Mind • Future Leader</p>
+            <h1 class="font-serif text-5xl md:text-7xl mb-6 leading-tight">
+                Hi! <span class="italic text-yellow-500">Fasha's</span> here.<br>
+                <span class="gradient-text italic">Digital Creator.</span>
+            </h1>
+            
+            <div class="space-y-4 mb-10 max-w-lg text-gray-500 leading-relaxed">
+                <p class="text-lg font-medium text-gray-700">
+                    A student at SMAN 1 Magetan passionate about entrepreneurship and visual arts.
+                </p>
+                <div class="quote-box text-sm md:text-base border-l-2 border-pink-100">
+                    "Creativity is intelligence having fun." — Albert Einstein
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                <a href="#about" class="btn-grad px-8 py-4 text-white rounded-full font-bold text-[10px] uppercase tracking-widest transition-all shadow-xl shadow-pink-100">Get to Know Me</a>
+                <a href="#experience" class="px-8 py-4 border border-pink-200 text-pink-400 rounded-full font-bold text-[10px] uppercase tracking-widest hover:border-yellow-400 hover:text-yellow-600 transition-all bg-white/50">My Work</a>
+            </div>
+        </div>
+
+        <div class="md:w-1/2 flex justify-center">
+            <div class="profile-container">
+                <div class="profile-frame"></div>
+                <div class="profile-img-wrapper">
+                    <img src="https://lh3.googleusercontent.com/d/1Dcvq3XtnsYYdfe02exaEi2hwxoE13Es1" alt="Fasha Kharisma Putri" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-32 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="space-y-8">
+                    <h2 class="font-serif text-4xl italic">Personal <span class="text-pink-400">Bio.</span></h2>
+                    
+                    <div class="bg-white p-6 rounded-3xl border border-pink-50 italic text-gray-600 text-sm">
+                        "Your work is going to fill a large part of your life, and the only way to be truly satisfied is to do what you believe is great work." — Steve Jobs
+                    </div>
+
+                    <ul class="space-y-4 text-gray-500">
+                        <li class="flex items-center gap-4">
+                            <span class="w-10 h-10 rounded-full bg-pink-50 flex items-center justify-center text-pink-400 text-xs shadow-inner"><i class="fa-solid fa-user"></i></span>
+                            <div>
+                                <p class="text-[10px] font-black uppercase tracking-widest text-gray-300">Name</p>
+                                <p class="font-bold text-gray-600">Fasha Kharisma Putri</p>
+                            </div>
+                        </li>
+                        <li class="flex items-center gap-4">
+                            <span class="w-10 h-10 rounded-full bg-yellow-50 flex items-center justify-center text-yellow-600 text-xs shadow-inner"><i class="fa-solid fa-cake-candles"></i></span>
+                            <div>
+                                <p class="text-[10px] font-black uppercase tracking-widest text-gray-300">Born</p>
+                                <p class="font-bold text-gray-600">Malang, Feb 11th 2008</p>
+                            </div>
+                        </li>
+                    </ul>
+                    
+                    <div>
+                        <h3 class="font-serif text-2xl italic mb-4">Focus Areas</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-5 py-2 bg-pink-50/50 rounded-full text-[10px] font-bold text-pink-400 uppercase tracking-tighter">Graphic Design</span>
+                            <span class="px-5 py-2 bg-yellow-50/50 rounded-full text-[10px] font-bold text-yellow-600 uppercase tracking-tighter">Digital Marketing</span>
+                            <span class="px-5 py-2 bg-blue-50/50 rounded-full text-[10px] font-bold text-blue-400 uppercase tracking-tighter">Branding</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-aesthetic p-10 bg-white relative overflow-hidden">
+                    <h3 class="font-serif text-3xl italic mb-6 text-center">Skillset</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between text-[10px] font-black uppercase tracking-widest mb-2">
+                                <span>Marketing Strategy</span>
+                                <span>88%</span>
+                            </div>
+                            <div class="w-full bg-gray-100 h-1.5 rounded-full overflow-hidden">
+                                <div class="btn-grad h-full rounded-full w-[88%]"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-[10px] font-black uppercase tracking-widest mb-2">
+                                <span>Visual Arts</span>
+                                <span>92%</span>
+                            </div>
+                            <div class="w-full bg-gray-100 h-1.5 rounded-full overflow-hidden">
+                                <div class="btn-grad h-full rounded-full w-[92%]"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-[10px] font-black uppercase tracking-widest mb-2">
+                                <span>Public Speaking</span>
+                                <span>95%</span>
+                            </div>
+                            <div class="w-full bg-gray-100 h-1.5 rounded-full overflow-hidden">
+                                <div class="btn-grad h-full rounded-full w-[95%]"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-10 text-[10px] text-center text-gray-400 uppercase tracking-widest">
+                        "Skill is only developed by hours and hours of work."
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-32 bg-white/60">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="font-serif text-4xl italic mb-20">Academic <span class="gradient-text italic">Path.</span></h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+                <div class="card-aesthetic p-8">
+                    <div class="edu-node">
+                        <p class="text-[10px] font-black text-pink-300 uppercase tracking-[0.3em]">Early Studies</p>
+                        <h4 class="font-bold text-lg">TKIT & SDIT Al-Uswah</h4>
+                    </div>
+                </div>
+                <div class="card-aesthetic p-8">
+                    <div class="edu-node">
+                        <p class="text-[10px] font-black text-yellow-500 uppercase tracking-[0.3em]">Middle School</p>
+                        <h4 class="font-bold text-lg">IIS PSM Magetan</h4>
+                    </div>
+                    <div class="edu-node" style="border-left: 2px dashed var(--accent-yellow);">
+                        <p class="text-[10px] font-black text-yellow-500 uppercase tracking-[0.3em]">High School</p>
+                        <h4 class="font-bold text-lg gradient-text">SMAN 1 Magetan</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-32 px-6">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="font-serif text-4xl text-center italic mb-4">Career <span class="text-pink-400">Timeline.</span></h2>
+            <p class="text-center text-xs text-gray-400 mb-20 italic">"Choose a job you love, and you will never have to work a day in your life." — Confucius</p>
+            
+            <div class="space-y-12">
+                <!-- Mama's Farm Market -->
+                <div class="flex flex-col md:flex-row gap-8 items-start">
+                    <div class="md:w-1/4">
+                        <span class="text-[10px] font-black text-pink-400 uppercase tracking-widest">2025 - Present</span>
+                        <h4 class="font-serif italic text-xl">Digital Era</h4>
+                    </div>
+                    <div class="md:w-3/4 card-aesthetic p-8 border-l-4 border-l-yellow-400 bg-yellow-50/20">
+                        <h5 class="font-bold text-lg mb-2">Digital Marketing Specialist</h5>
+                        <p class="text-sm font-bold text-gray-600 mb-2">Mama's Farm Market</p>
+                        <ul class="text-xs text-gray-500 list-disc list-inside space-y-1">
+                            <li>Managing social media presence and online branding.</li>
+                            <li>Creating content strategies for organic growth.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Ndalem Prabu Sarangan -->
+                <div class="flex flex-col md:flex-row gap-8 items-start">
+                    <div class="md:w-1/4">
+                        <span class="text-[10px] font-black text-gray-300 uppercase tracking-widest">2024 - 2025</span>
+                        <h4 class="font-serif italic text-xl">Design Focus</h4>
+                    </div>
+                    <div class="md:w-3/4 card-aesthetic p-8 border-l-4 border-l-pink-400">
+                        <h5 class="font-bold text-lg mb-2">Graphic Designer</h5>
+                        <p class="text-sm font-bold text-gray-600 mb-2">Ndalem Prabu Sarangan</p>
+                        <p class="text-xs text-gray-500 italic">
+                            Responsible for visual identity and promotional materials for one of Magetan's prominent venues.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- OSIS Section -->
+                <div class="flex flex-col md:flex-row gap-8 items-start">
+                    <div class="md:w-1/4">
+                        <span class="text-[10px] font-black text-gray-300 uppercase tracking-widest">Leadership</span>
+                        <h4 class="font-serif italic text-xl">Organization</h4>
+                    </div>
+                    <div class="md:w-3/4 space-y-4">
+                        <div class="card-aesthetic p-8 bg-gradient-to-br from-pink-50 to-white">
+                            <h5 class="font-bold text-lg mb-4 text-pink-500">Student Council (OSIS)</h5>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <p class="font-bold text-sm">Head of SEKBID 5</p>
+                                    <p class="text-[10px] text-pink-400 font-bold uppercase tracking-tighter italic">Entrepreneurship Division</p>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-sm">Liaison Officer (LO)</p>
+                                    <p class="text-[10px] text-pink-400 font-bold uppercase tracking-tighter italic">HIVI! - 64th Anniversary Project</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="py-32 px-6 text-center">
+        <div class="max-w-2xl mx-auto">
+            <div class="mb-12">
+                <i class="fa-solid fa-quote-left text-pink-100 text-6xl mb-4"></i>
+                <h3 class="font-serif text-3xl italic text-gray-700">"The best way to predict the future is to create it."</h3>
+                <p class="text-pink-400 font-bold mt-2">— Peter Drucker</p>
+            </div>
+
+            <h2 class="font-serif text-5xl italic mb-6">Let's Connect<span class="text-pink-400">.</span></h2>
+            
+            <div class="flex justify-center gap-6 mb-20">
+                <a href="https://instagram.com/fashaas_" target="_blank" class="w-14 h-14 rounded-full border border-pink-100 flex items-center justify-center text-pink-400 hover:btn-grad hover:text-white transition-all shadow-md bg-white">
+                    <i class="fab fa-instagram text-xl"></i>
+                </a>
+                <a href="https://wa.me/6281235273450" target="_blank" class="w-14 h-14 rounded-full border border-yellow-100 flex items-center justify-center text-yellow-600 hover:btn-grad hover:text-white transition-all shadow-md bg-white">
+                    <i class="fab fa-whatsapp text-xl"></i>
+                </a>
+            </div>
+
+            <p class="text-[8px] font-black text-gray-300 uppercase tracking-[0.8em]">Fasha Kharisma Putri • 2026 Portfolio</p>
+        </div>
+    </footer>
+
+    <script>
+        const bubbleContainer = document.getElementById('bubbleContainer');
+        const colors = ['#FFD1DC', '#FFF9C4', '#FFFFFF', '#FF85A1'];
+
+        function createBubble() {
+            const bubble = document.createElement('div');
+            bubble.className = 'bubble';
+            const size = Math.random() * 60 + 10 + 'px';
+            bubble.style.width = size;
+            bubble.style.height = size;
+            bubble.style.left = Math.random() * 100 + 'vw';
+            const speed = Math.random() * 10 + 10 + 's';
+            const distance = (Math.random() * 200 - 100) + 'px';
+            bubble.style.setProperty('--speed', speed);
+            bubble.style.setProperty('--distance', distance);
+            bubble.style.background = colors[Math.floor(Math.random() * colors.length)];
+            bubbleContainer.appendChild(bubble);
+            setTimeout(() => { bubble.remove(); }, parseFloat(speed) * 1000);
+        }
+
+        setInterval(createBubble, 2000);
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) { window.scrollTo({ top: target.offsetTop, behavior: 'smooth' }); }
+            });
+        });
+    </script>
+</body>
+</html>
